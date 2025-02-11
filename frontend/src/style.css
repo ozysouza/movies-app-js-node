@@ -49,3 +49,22 @@ input {
     width: 100%;
     padding: 6px 9px;
 }
+
+.thumbnail {
+    height: 350px;
+    width: 300px;
+    border-radius: 19px;
+}
+
+.column {
+    float: left;
+    width: 20%;
+    padding: 10px 10x;
+}
+
+.card {
+    border-radius: 19px;
+    padding: 15px;
+    text-align: center;
+    background-color: #151f30;
+}
