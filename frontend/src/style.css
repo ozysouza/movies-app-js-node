@@ -65,6 +65,96 @@ input {
 .card {
     border-radius: 19px;
     padding: 15px;
+    margin: 15px;
     text-align: center;
     background-color: #151f30;
+}
+
+/* For tablets and smaller desktops */
+@media (max-width: 1024px) {
+    .column {
+        width: 25%;
+        /* 4 columns per row */
+    }
+
+    .thumbnail {
+        height: 300px;
+        width: 250px;
+    }
+}
+
+/* For smaller tablets */
+@media (max-width: 768px) {
+    .column {
+        width: 33.33%;
+        /* 3 columns per row */
+    }
+
+    .thumbnail {
+        height: 250px;
+        width: 200px;
+    }
+
+    .topnav a {
+        font-size: 1rem;
+        padding: 10px 12px;
+    }
+
+    form {
+        width: 250px;
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+    .column {
+        width: 50%;
+        /* 2 columns per row */
+    }
+
+    .thumbnail {
+        height: 200px;
+        width: 150px;
+    }
+
+    .topnav a {
+        font-size: 0.9rem;
+        padding: 8px 10px;
+    }
+
+    form {
+        width: 200px;
+        height: 38px;
+    }
+
+    input {
+        font-size: 13px;
+    }
+}
+
+/* For very small mobile devices */
+@media (max-width: 320px) {
+    .column {
+        width: 100%;
+        /* 1 column per row */
+    }
+
+    .thumbnail {
+        height: 180px;
+        width: 140px;
+    }
+
+    .topnav a {
+        font-size: 0.8rem;
+        padding: 6px 8px;
+    }
+
+    form {
+        width: 180px;
+        height: 35px;
+    }
+
+    input {
+        font-size: 12px;
+    }
 }
