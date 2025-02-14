@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "This is the backend for movies app",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ozysouza/movies-app-js-node.git"
+  },
+  "author": "Oziel De Souza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ozysouza/movies-app-js-node/issues"
+  },
+  "homepage": "https://github.com/ozysouza/movies-app-js-node#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "jquery": "^3.7.1",
+    "mongodb": "^6.13.0",
+    "nodemon": "^3.1.9"
+  }
+}
