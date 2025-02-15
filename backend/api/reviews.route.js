@@ -4,13 +4,13 @@ import ReviewCtrl from "./reviews.controller.js"
 const router = express.Router();
 
 router.route("/movie/:id")
-    .get(ReviewCtrl.apigetReview);
+    .get(ReviewCtrl.apiGetReview);
 
 router.route("/new")
     .post(ReviewCtrl.apiPostReview);
 
 router.route("/:id")
-    .get(ReviewCtrl.apigetReview)
+    .get(ReviewCtrl.apiGetReview)
     .put(ReviewCtrl.apiUpdateReview)
     .delete(ReviewCtrl.apiDeleteReview)
 
