@@ -13,7 +13,7 @@ export default class ReviewsController {
                 review
             );
             res.status(200)
-                .json({ 
+                .json({
                     status: "success"
                 });
         } catch (error) {
@@ -36,6 +36,43 @@ export default class ReviewsController {
             }
         } catch (error) {
             console.error(`api, ${error}`);
+            res.status(500)
+                .json({
+                    error: error.message
+                });
+        }
+    }
+
+    static async apiUpdateReview(req, res, next) {
+        try {
+            const reviewId = req.params.id;
+            const review = req.body.id;
+            const user = req.body.id;
+
+            const reviewResponse = await ReviewsDAO.updateReview(
+                reviewId,
+                user,
+                review
+            );
+
+            var { error } = reviewResponse;
+            if (error) {
+                res.status(400)
+                    .jsonq({
+                        error
+                    });
+            }
+
+            if (reviewResponse.modifiedCount === 0) {
+                throw new Error(
+                    "unable to update review",
+                );
+            }
+
+            res.json({
+                status: "success"
+            });
+        } catch (error) {
             res.status(500)
                 .json({
                     error: error.message
