@@ -79,4 +79,22 @@ export default class ReviewsController {
                 });
         }
     }
+
+    static async apiDeleteReview(req, res, next) {
+        try {
+            const reviewId = req.params.id;
+            const reviewResponse = await ReviewsDAO.deleteReview(reviewId);
+
+            if (reviewResponse) {
+                res.json({
+                    status: "success"
+                });
+            }
+        } catch (error) {
+            res.status(500)
+                .json({
+                    error: error.message
+                });
+        }
+    } 
 }
