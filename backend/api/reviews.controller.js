@@ -96,5 +96,26 @@ export default class ReviewsController {
                     error: error.message
                 });
         }
-    } 
+    }
+
+    static async apiGetReviews(req, res, next) {
+        try {
+            let id = req.params.id || {};
+            let reviews = await ReviewsDAO.getReviewsByMovieId(id);
+            if (!reviews) {
+                res.status(404)
+                    .json({
+                        error: "Not found"
+                    });
+            }
+            res.json(reviews);
+        } catch (error) {
+            console.error(`api, ${error}`);
+            res.status(500)
+                .json({
+                    error: error.message
+                });
+        }
+    }
+
 }
