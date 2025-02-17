@@ -5,7 +5,7 @@ const ObjectId = mongodb.ObjectId;
 let reviews;
 
 export default class ReviewsDAO {
-      async injectDB(conn) {
+    async injectDB(conn) {
         if (reviews) {
             return
         }
@@ -28,6 +28,18 @@ export default class ReviewsDAO {
             return await reviews.insertOne(reviewDoc);
         } catch (error) {
             console.error(`Enable to post review: ${error}`)
+        }
+    }
+
+    static async getReview(reviewId) {
+        try {
+            return await reviews.findOne({
+
+                _id: ObjectId(reviewId)
+            })
+        } catch (error) {
+            console.error(`Enable to request post: ${error}`)
+            return { error: e }
         }
     }
 }
