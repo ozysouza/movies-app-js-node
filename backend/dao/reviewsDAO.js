@@ -42,4 +42,18 @@ export default class ReviewsDAO {
             return { error: e }
         }
     }
+
+    static async updateReview(reviewId, user, review) {
+        try {
+            const updateResponse = await reviews.updateOne(
+                { _id: ObjectId(reviewId) },
+                { $set: { user: user, review: review } }
+            );
+
+            return updateResponse;
+        } catch (error) {
+            console.error(`Unable to update review: ${error}`);
+            return { error: error };
+        }
+    }
 }
