@@ -56,4 +56,17 @@ export default class ReviewsDAO {
             return { error: error };
         }
     }
+
+    static async deleteReview(reviewId) {
+        try {
+            const deleteResponse = await reviews.deleteOne({
+                _id: ObjectId(reviewId),
+            });
+
+            return deleteResponse;
+        } catch (error) {
+            console.error(`Unable to update review: ${error}`);
+            return { error: error };
+        }
+    }
 }
