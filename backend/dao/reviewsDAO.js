@@ -5,7 +5,7 @@ const ObjectId = mongodb.ObjectId;
 let reviews;
 
 export default class ReviewsDAO {
-    async injectDB(conn) {
+    static async injectDB(conn) {
         if (reviews) {
             return
         }
