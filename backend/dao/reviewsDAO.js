@@ -12,6 +12,7 @@ export default class ReviewsDAO {
 
         try {
             reviews = await conn.db("reviews").collection("reviews");
+            console.info("Reviews collection initialized!");
         } catch (error) {
             console.error(`Enable to establish collection handles in userDAO: ${error}`)
         }
@@ -19,6 +20,10 @@ export default class ReviewsDAO {
 
     static async addReview(movieId, user, review) {
         try {
+            if (!reviews) {
+                throw new Error("No database connection. Reviews collection is not initialized.");
+            }
+
             const reviewDoc = {
                 movieId: movieId,
                 user: user,
