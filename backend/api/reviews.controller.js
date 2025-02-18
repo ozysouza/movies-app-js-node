@@ -12,15 +12,9 @@ export default class ReviewsController {
                 user,
                 review
             );
-            res.status(200)
-                .json({
-                    status: "success"
-                });
-        } catch (error) {
-            res.status(500)
-                .json({
-                    error: error.message
-                });
+            res.status(200).json({ status: "success" });
+        } catch (e) {
+            res.status(500).json({ error: e.message });
         }
     }
 
@@ -29,17 +23,11 @@ export default class ReviewsController {
             let id = req.params.id || {};
             let review = await ReviewsDAO.getReview(id);
             if (!review) {
-                res.status(404)
-                    .json({
-                        error: "Not found"
-                    });
+                res.status(404).json({ error: "Not found" });
             }
-        } catch (error) {
-            console.error(`api, ${error}`);
-            res.status(500)
-                .json({
-                    error: error.message
-                });
+        } catch (e) {
+            console.error(`api, ${e}`);
+            res.status(500).json({ error: e.message });
         }
     }
 
@@ -57,10 +45,7 @@ export default class ReviewsController {
 
             var { error } = reviewResponse;
             if (error) {
-                res.status(400)
-                    .jsonq({
-                        error
-                    });
+                res.status(400).jsonq({ error });
             }
 
             if (reviewResponse.modifiedCount === 0) {
@@ -69,14 +54,9 @@ export default class ReviewsController {
                 );
             }
 
-            res.json({
-                status: "success"
-            });
-        } catch (error) {
-            res.status(500)
-                .json({
-                    error: error.message
-                });
+            res.json({ status: "success" });
+        } catch (e) {
+            res.status(500).json({ error: e.message });
         }
     }
 
@@ -86,15 +66,10 @@ export default class ReviewsController {
             const reviewResponse = await ReviewsDAO.deleteReview(reviewId);
 
             if (reviewResponse) {
-                res.json({
-                    status: "success"
-                });
+                res.json({ status: "success" });
             }
-        } catch (error) {
-            res.status(500)
-                .json({
-                    error: error.message
-                });
+        } catch (e) {
+            res.status(500).json({ error: e.message });
         }
     }
 
@@ -103,18 +78,12 @@ export default class ReviewsController {
             let id = req.params.id || {};
             let reviews = await ReviewsDAO.getReviewsByMovieId(id);
             if (!reviews) {
-                res.status(404)
-                    .json({
-                        error: "Not found"
-                    });
+                res.status(404).json({ error: "Not found" });
             }
             res.json(reviews);
-        } catch (error) {
-            console.error(`api, ${error}`);
-            res.status(500)
-                .json({
-                    error: error.message
-                });
+        } catch (e) {
+            console.error(`api, ${e}`);
+            res.status(500).json({ error: e.message });
         }
     }
 

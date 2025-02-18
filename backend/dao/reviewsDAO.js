@@ -11,8 +11,8 @@ export default class ReviewsDAO {
         try {
             reviews = await conn.db("reviews").collection("reviews");
             console.info("Reviews collection initialized!");
-        } catch (error) {
-            console.error(`Enable to establish collection handles in userDAO: ${error}`)
+        } catch (e) {
+            console.error(`Enable to establish collection handles in userDAO: ${e}`)
         }
     }
 
@@ -29,8 +29,8 @@ export default class ReviewsDAO {
             }
 
             return await reviews.insertOne(reviewDoc);
-        } catch (error) {
-            console.error(`Enable to post review: ${error}`)
+        } catch (e) {
+            console.error(`Enable to post review: ${e}`)
         }
     }
 
@@ -39,9 +39,9 @@ export default class ReviewsDAO {
             return await reviews.findOne({
                 _id: reviewId
             });
-        } catch (error) {
-            console.error(`Enable to request post: ${error}`)
-            return { error: e }
+        } catch (e) {
+            console.error(`Enable to request post: ${e}`)
+            return { error: e.message }
         }
     }
 
@@ -53,9 +53,9 @@ export default class ReviewsDAO {
             );
 
             return updateResponse;
-        } catch (error) {
-            console.error(`Unable to update review: ${error}`);
-            return { error: error };
+        } catch (e) {
+            console.error(`Unable to update review: ${e}`);
+            return { error: e.message };
         }
     }
 
@@ -66,9 +66,9 @@ export default class ReviewsDAO {
             });
 
             return deleteResponse;
-        } catch (error) {
-            console.error(`Unable to update review: ${error}`);
-            return { error: error };
+        } catch (e) {
+            console.error(`Unable to update review: ${e}`);
+            return { error: e.message };
         }
     }
 
@@ -79,9 +79,9 @@ export default class ReviewsDAO {
             });
 
             return cursor.toArray();
-        } catch (error) {
-            console.error(`Unable to update review: ${error}`);
-            return { error: error };
+        } catch (e) {
+            console.error(`Unable to update review: ${e}`);
+            return { error: e.message };
         }
     }
 }
