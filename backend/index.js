@@ -23,23 +23,15 @@ async function connectToMongoDB() {
         await client.connect();
         await ReviewsDAO.injectDB(client);
 
-        app.listen(port, () => console.log(`Listening on port ${port}!`))
+        app.listen(port, () => console.log(`Listening on port ${port}!`));
+
         await client.db("admin").command({ ping: 1 });
         console.info("Connected to MongoDB!");
         return client;
     } catch (error) {
         console.error("Error connecting to MongoDBL", error);
         throw error;
-    } finally {
-        await client.close();
     }
 }
 
-connectToMongoDB();
-
-
-
-
-
-
-
+connectToMongoDB().catch(console.error);
