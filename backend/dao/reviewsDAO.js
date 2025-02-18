@@ -69,4 +69,17 @@ export default class ReviewsDAO {
             return { error: error };
         }
     }
+
+    static async getReviewsByMovieId(movieId) {
+        try {
+            const cursor = await reviews.find({
+                movieId: parseInt(movieId)
+            });
+
+            return cursor.toArray();
+        } catch (error) {
+            console.error(`Unable to update review: ${error}`);
+            return { error: error };
+        }
+    }
 }
