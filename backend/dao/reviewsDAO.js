@@ -67,7 +67,7 @@ export default class ReviewsDAO {
 
             return deleteResponse;
         } catch (e) {
-            console.error(`Unable to update review: ${e}`);
+            console.error(`Unable to delete review: ${e}`);
             return { error: e.message };
         }
     }
@@ -80,7 +80,7 @@ export default class ReviewsDAO {
 
             return cursor.toArray();
         } catch (e) {
-            console.error(`Unable to update review: ${e}`);
+            console.error(`Unable to get review by movie: ${e}`);
             return { error: e.message };
         }
     }
