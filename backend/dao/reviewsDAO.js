@@ -1,5 +1,5 @@
 import mongodb from "mongodb";
-
+const objId = mongodb.ObjectId;
 let reviews;
 
 export default class ReviewsDAO {
@@ -37,7 +37,7 @@ export default class ReviewsDAO {
     static async getReview(reviewId) {
         try {
             return await reviews.findOne({
-                _id: reviewId
+                _id: objId.createFromHexString(reviewId)
             });
         } catch (e) {
             console.error(`Enable to request post: ${e}`)
@@ -48,7 +48,7 @@ export default class ReviewsDAO {
     static async updateReview(reviewId, user, review) {
         try {
             const updateResponse = await reviews.updateOne(
-                { _id: reviewId },
+                { _id: objId.createFromHexString(reviewId) },
                 { $set: { user: user, review: review } }
             );
 
@@ -62,7 +62,7 @@ export default class ReviewsDAO {
     static async deleteReview(reviewId) {
         try {
             const deleteResponse = await reviews.deleteOne({
-                _id: reviewId,
+                _id: objId.createFromHexString(reviewId),
             });
 
             return deleteResponse;
