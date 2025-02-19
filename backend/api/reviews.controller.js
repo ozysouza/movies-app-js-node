@@ -35,8 +35,8 @@ export default class ReviewsController {
     static async apiUpdateReview(req, res, next) {
         try {
             const reviewId = req.params.id;
-            const review = req.body.id;
-            const user = req.body.id;
+            const review = req.body.review;
+            const user = req.body.user;
 
             const reviewResponse = await ReviewsDAO.updateReview(
                 reviewId,
