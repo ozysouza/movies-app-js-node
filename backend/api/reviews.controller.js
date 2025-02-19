@@ -25,6 +25,7 @@ export default class ReviewsController {
             if (!review) {
                 res.status(404).json({ error: "Not found" });
             }
+            res.json(review);
         } catch (e) {
             console.error(`api, ${e}`);
             res.status(500).json({ error: e.message });
