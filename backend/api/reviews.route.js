@@ -4,7 +4,7 @@ import ReviewCtrl from "./reviews.controller.js"
 const router = express.Router();
 
 router.route("/movie/:id")
-    .get(ReviewCtrl.apiGetReview);
+    .get(ReviewCtrl.apiGetReviews);
 
 router.route("/new")
     .post(ReviewCtrl.apiPostReview);
