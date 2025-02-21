@@ -64,7 +64,35 @@ function editReview(id, review, user) {
             <input type="text" id="${userInputId}" value="${user}">
         </p>
         <p>
-            <a href="#" onclick="saveReview('${reviewInputId}', '${userInputId}', '${id}',)">💾</a>
+            <a href="#" class="save-review" data-id="${id}">💾</a>
         </p>
     `);
+
+    $(".save-review").on("click", function (e) {
+        e.preventDefault();
+        const id = $(this).data("id");
+        const review = $(this).data("review");
+        const user = $(this).data("user");
+        saveReview(id, reviewInputId, userInputId);
+    });
+}
+
+function saveReview(id, reviewInputId, userInputId) {
+    const review = $("#" + reviewInputId).val();
+    const user = $("#" + userInputId).val();
+
+    fetch(APILINK + id, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "user": user, "review": review })
+    })
+        .then(res => res.json())
+        .then(res => {
+            console.info(res)
+            location.reload();
+        })
+        .catch(error => console.error('Error:', error));
 }
