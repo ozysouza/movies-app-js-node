@@ -25,19 +25,19 @@ function returnReviews(url) {
                     .attr('id', review._id);
 
                 const reviewSection = $('<div>')
-                    .addClass(`review_${review._id}`)
+                    .addClass(`review-sec-${review._id}`)
                     .html(`
                         <p><strong>Review: </strong>${review.review}</p>
                         <p><strong>User: </strong>${review.user}</p>
                         <p>
-                            <a href="#" onclick="editReview('${review._id}', '${review.review}', '${review.user}')">✏️</a>
-                            <a href="#" onclick="deleteReview('${review._id}')">🗑</a>
+                            <a href="#" class="edit-review" data-id="${review._id}" data-review="${review.review}" data-user="${review.user}">✏️</a>
+                            <a href="#" class="delete-review" data-id="${review._id}">🗑</a>
                         </p>
                     `);
-                
+
                 main.append(div_row);
                 div_row.append(div_column);
-                div_column.append(div_card);   
+                div_column.append(div_card);
                 div_card.append(reviewSection);
             });
         });
