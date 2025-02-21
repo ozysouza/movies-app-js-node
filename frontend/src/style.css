@@ -43,9 +43,8 @@ form {
 }
 
 input {
-    all: unset;
     font: 15px system-ui;
-    color: #fff;
+    color: #131720;
     height: 100%;
     width: 100%;
     padding: 6px 9px;

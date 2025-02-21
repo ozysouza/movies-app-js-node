@@ -40,5 +40,31 @@ function returnReviews(url) {
                 div_column.append(div_card);
                 div_card.append(reviewSection);
             });
+
+            $(".edit-review").on("click", function (e) {
+                e.preventDefault();
+                const id = $(this).data("id");
+                const review = $(this).data("review");
+                const user = $(this).data("user");
+                editReview(id, review, user);
+            });
         });
+}
+
+function editReview(id, review, user) {
+    const element = $('#' + id);
+    const reviewInputId = 'review' + id;
+    const userInputId = 'user' + id;
+
+    element.html(`
+        <p><strong>Review: </strong>
+            <input type="text" id="${reviewInputId}" value="${review}">
+        </p>
+        <p><strong>User: </strong>
+            <input type="text" id="${userInputId}" value="${user}">
+        </p>
+        <p>
+            <a href="#" onclick="saveReview('${reviewInputId}', '${userInputId}', '${id}',)">💾</a>
+        </p>
+    `);
 }
