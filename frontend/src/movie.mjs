@@ -52,9 +52,9 @@ function returnReviews(url) {
 }
 
 function editReview(id, review, user) {
-    const element = $('#' + id);
-    const reviewInputId = 'review' + id;
-    const userInputId = 'user' + id;
+    const element = $("#" + id);
+    const reviewInputId = "review" + id;
+    const userInputId = "user" + id;
 
     element.html(`
         <p><strong>Review: </strong>
