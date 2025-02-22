@@ -80,6 +80,12 @@ function returnReviews(url) {
 				const user = $(this).data('user');
 				editReview(id, review, user);
 			});
+
+			$('.delete-review').on('click', function (e) {
+				e.preventDefault();
+				const id = $(this).data('id');
+				deleteReview(id);
+			});
 		});
 }
 
@@ -148,4 +154,16 @@ function saveReview(id = '', reviewInputId, userInputId) {
 			})
 			.catch((error) => console.error('Error:', error));
 	}
+}
+
+function deleteReview(reviewId) {
+	fetch(APILINK + reviewId, {
+		method: 'DELETE',
+	})
+		.then((res) => res.json())
+		.then((res) => {
+			console.info(res);
+			location.reload();
+		})
+		.catch((error) => console.error('Error: ', error));
 }
