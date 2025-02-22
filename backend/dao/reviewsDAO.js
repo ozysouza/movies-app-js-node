@@ -1,87 +1,93 @@
-import mongodb from "mongodb";
+import mongodb from 'mongodb';
 const objId = mongodb.ObjectId;
 let reviews;
 
 export default class ReviewsDAO {
-    static async injectDB(conn) {
-        if (reviews) {
-            return
-        }
+	static async injectDB(conn) {
+		if (reviews) {
+			return;
+		}
 
-        try {
-            reviews = await conn.db("reviews").collection("reviews");
-            console.info("Reviews collection initialized!");
-        } catch (e) {
-            console.error(`Enable to establish collection handles in userDAO: ${e}`)
-        }
-    }
+		try {
+			reviews = await conn
+				.db('reviews')
+				.collection('reviews');
+			console.info('Reviews collection initialized!');
+		} catch (e) {
+			console.error(
+				`Enable to establish collection handles in userDAO: ${e}`
+			);
+		}
+	}
 
-    static async addReview(movieId, user, review) {
-        try {
-            if (!reviews) {
-                throw new Error("No database connection. Reviews collection is not initialized.");
-            }
+	static async addReview(movieId, user, review) {
+		try {
+			if (!reviews) {
+				throw new Error(
+					'No database connection. Reviews collection is not initialized.'
+				);
+			}
 
-            const reviewDoc = {
-                movieId: movieId,
-                user: user,
-                review: review
-            }
+			const reviewDoc = {
+				movieId: movieId,
+				user: user,
+				review: review,
+			};
 
-            return await reviews.insertOne(reviewDoc);
-        } catch (e) {
-            console.error(`Enable to post review: ${e}`)
-        }
-    }
+			return await reviews.insertOne(reviewDoc);
+		} catch (e) {
+			console.error(`Enable to post review: ${e}`);
+		}
+	}
 
-    static async getReview(reviewId) {
-        try {
-            return await reviews.findOne({
-                _id: objId.createFromHexString(reviewId)
-            });
-        } catch (e) {
-            console.error(`Enable to request post: ${e}`)
-            return { error: e.message }
-        }
-    }
+	static async getReview(reviewId) {
+		try {
+			return await reviews.findOne({
+				_id: objId.createFromHexString(reviewId),
+			});
+		} catch (e) {
+			console.error(`Enable to request post: ${e}`);
+			return { error: e.message };
+		}
+	}
 
-    static async updateReview(reviewId, user, review) {
-        try {
-            const updateResponse = await reviews.updateOne(
-                { _id: objId.createFromHexString(reviewId) },
-                { $set: { user: user, review: review } }
-            );
+	static async updateReview(reviewId, user, review) {
+		try {
+			const updateResponse = await reviews.updateOne(
+				{ _id: objId.createFromHexString(reviewId) },
+				{ $set: { user: user, review: review } }
+			);
 
-            return updateResponse;
-        } catch (e) {
-            console.error(`Unable to update review: ${e}`);
-            return { error: e.message };
-        }
-    }
+			return updateResponse;
+		} catch (e) {
+			console.error(`Unable to update review: ${e}`);
+			return { error: e.message };
+		}
+	}
 
-    static async deleteReview(reviewId) {
-        try {
-            const deleteResponse = await reviews.deleteOne({
-                _id: objId.createFromHexString(reviewId),
-            });
+	static async deleteReview(reviewId) {
+		try {
+			const deleteResponse = await reviews.deleteOne({
+				_id: objId.createFromHexString(reviewId),
+			});
 
-            return deleteResponse;
-        } catch (e) {
-            console.error(`Unable to delete review: ${e}`);
-            return { error: e.message };
-        }
-    }
+			return deleteResponse;
+		} catch (e) {
+			console.error(`Unable to delete review: ${e}`);
+			return { error: e.message };
+		}
+	}
 
-    static async getReviewsByMovieId(movieId) {
-        try {
-            const cursor = await reviews.find({
-                movieId: parseInt(movieId)
-            });
+	static async getReviewsByMovieId(movieId) {
+		try {
+			const cursor = await reviews.find({
+				movieId: parseInt(movieId),
+			});
 
-            return cursor.toArray();
-        } catch (e) {
-            console.error(`Unable to get review by movie: ${e}`);
-            return { error: e.message };
-        }
-    }
+			return cursor.toArray();
+		} catch (e) {
+			console.error(`Unable to get review by movie: ${e}`);
+			return { error: e.message };
+		}
+	}
 }
